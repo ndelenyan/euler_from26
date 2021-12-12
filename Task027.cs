@@ -12,7 +12,7 @@ namespace euler_from26
             for (int n=0; n < Math.Abs(a * b); n++)
                 yield return value(a, b, n);
         }
-        public static int[] primes;
+        public static long[] primes;
 
         public static int conseq_primes(int a, int b)
         {
@@ -33,7 +33,7 @@ namespace euler_from26
             int b_max = 1000;
             int n_max = b_max * b_max + a_max * b_max + b_max;
             int ab_max = 0;
-            int n_maxx = 0;
+            long n_maxx = 0;
             primes = Prime.Primes(n_max);
             for (int a = a_min; a <= a_max; a++)
                 for (int b = b_min; b <= b_max; b++)

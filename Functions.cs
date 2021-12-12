@@ -6,25 +6,33 @@ namespace euler_from26
     public static class Functions
     {
 
-        public static void swap(ref int a, ref int b)
+        public static void swap(ref long a, ref long b)
         {
-            int tmp = a;
+            long tmp = a;
             a = b;
             b = tmp;
         }
 
-        public static IEnumerable<int[]> Permute(int[] ints, int fix)
+        public static IEnumerable<long[]> Permute(long[] ints, long fix)
         {
             if (fix == ints.Length - 1)
                 yield return ints;
             else
-                for (int f = fix; f < ints.Length; f++)
+                for (long f = fix; f < ints.Length; f++)
                 {
                     swap(ref ints[fix], ref ints[f]);
                     foreach(var p in Permute(ints, fix + 1))
                         yield return p;
                     swap(ref ints[fix], ref ints[f]);
                 }
+        }
+
+        public static List<long> ToList(long[] array)
+        {
+            List<long> lst = new();
+            foreach(var l in array)
+                lst.Add(l);
+            return lst;
         }
 
         public static int WordValue(string name)
@@ -48,10 +56,10 @@ namespace euler_from26
                 name[i] = names[i].Trim('\"');
             return name;
         }
-        public static int Factorial(int n)
+        public static long Factorial(long n)
         {
-            int res = 1;
-            for (int i=1; i<= n; i++)
+            long res = 1;
+            for (long i=1; i<= n; i++)
                 res *= i;
             return res;
         }

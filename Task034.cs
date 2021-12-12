@@ -4,9 +4,9 @@ namespace euler_from26
     public static class Task34
     {
 
-        public static int sum_fact(int n)
+        public static long sum_fact(long n)
         {
-            int sum = 0;
+            long sum = 0;
             foreach(var d in Digits.digits(n))
                 sum += Functions.Factorial(d);
             return sum;

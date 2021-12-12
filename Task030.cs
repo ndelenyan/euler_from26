@@ -9,7 +9,7 @@ namespace euler_from26
             int all_sum = 0;
             for (int i = 1; i < max; i++)
             {
-                int sum = 0;
+                long sum = 0;
                 foreach(var digit in Digits.digits(i))
                     sum += digit * digit * digit * digit * digit;
                 if (sum == i)

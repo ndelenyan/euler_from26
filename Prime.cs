@@ -6,15 +6,15 @@ namespace euler_from26
     {
 
         public static bool isDivisible(long n, int by) => n % by == 0;
-        public static IEnumerable<int> Prime_to(int max)
+        public static IEnumerable<long> Prime_to(long max)
         {
-            int[] sieve = new int[max+1];
+            long[] sieve = new long[max+1];
             // 0 means can be prime
             // 1 means compound
-            for (int candidate = 2; candidate <= max; candidate++)
+            for (long candidate = 2; candidate <= max; candidate++)
                 if (sieve[candidate] == 0)
                 {
-                    int pin = candidate;
+                    long pin = candidate;
                     do
                     {
                         sieve[pin] = 1;
@@ -24,10 +24,10 @@ namespace euler_from26
                 }
         }
 
-        public static int[] Primes(int max)
+        public static long[] Primes(long max)
         {
-            List<int>primes = new();
-            foreach(int p in Prime_to(max))
+            List<long>primes = new();
+            foreach(long p in Prime_to(max))
                 primes.Add(p);
             return primes.ToArray();
         }
@@ -39,9 +39,9 @@ namespace euler_from26
                     yield return candidate;
         }
 
-        public static List<int>Prime_Divisors(int n, int[] primes)
+        public static List<long>Prime_Divisors(long n, long[] primes)
         {
-            List<int> divisors = new ();
+            List<long> divisors = new ();
             int index = 0;
             while(n>1)
                 if (n % primes[index] == 0)
@@ -54,9 +54,9 @@ namespace euler_from26
             return divisors;
         }
 
-        public static int[] Prime_Divisors_array(int n, int [] primes) => Prime_Divisors(n, primes).ToArray();
+        public static long[] Prime_Divisors_array(long n, long[] primes) => Prime_Divisors(n, primes).ToArray();
 
-        public static HashSet<int> Prime_Unique_Divisors(int n, int[] primes) => new HashSet<int>(Prime_Divisors(n, primes));
+        public static HashSet<long> Prime_Unique_Divisors(long n, long[] primes) => new HashSet<long>(Prime_Divisors(n, primes));
 
         public static void Reduce_Divisors(List<int> p1, List<int> p2)
         {

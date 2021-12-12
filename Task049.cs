@@ -6,9 +6,9 @@ namespace euler_from26
     public static class Task049
     {
 
-        public static int[] primes = Prime.Primes(10000);
+        public static long[] primes = Prime.Primes(10000);
 
-        public static IEnumerable<int> prime4()
+        public static IEnumerable<long> prime4()
         {
             foreach(var p in primes)
                 if (Digits.digit_len(p) == 4)

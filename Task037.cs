@@ -5,9 +5,9 @@ namespace euler_from26
 {
     public static class Task37
     {
-        public static int max = 1000000;
-        public static int[] primes = Prime.Primes(max);
-        public static bool isTunc(int[] digits)
+        public static long max = 1000000;
+        public static long[] primes = Prime.Primes(max);
+        public static bool isTunc(long[] digits)
         {
             for (int i=1; i<digits.Length; i++)
             {
@@ -23,8 +23,8 @@ namespace euler_from26
         }
         public static void main()
         {
-            int sum = 0;
-            int n = 0;
+            long sum = 0;
+            long n = 0;
             for (int i = Array.IndexOf(primes, 11); i < primes.Length; i++)
                 if (isTunc(Digits.digits_array(primes[i])))
                 {

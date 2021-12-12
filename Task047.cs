@@ -6,12 +6,12 @@ namespace euler_from26
     public static class Task47
     {
 
-        public static int max = 1000000;
+        public static long max = 1000000;
 
-        public static int[] primes = Prime.Primes(max);
+        public static long[] primes = Prime.Primes(max);
 
 
-        public static int countPrimeFactors(int n) => Prime.Prime_Unique_Divisors(n, primes).Count;
+        public static long countPrimeFactors(long n) => Prime.Prime_Unique_Divisors(n, primes).Count;
         public static void main()
         {
             int i = 1;

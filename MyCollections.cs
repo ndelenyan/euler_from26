@@ -6,7 +6,7 @@ namespace euler_from26
 {
     public static class MyCollections
     {
-        public static string Print(IEnumerable<int> t)
+        public static string Print(IEnumerable<long> t)
         {
             var SB = new StringBuilder();
             SB.Append("{");

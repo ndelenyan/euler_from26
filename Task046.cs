@@ -6,8 +6,8 @@ namespace euler_from26
     public static class Task46
     {
 
-        public static int max = 1000000;
-        public static int [] primes = Prime.Primes(max);
+        public static long max = 1000000;
+        public static long [] primes = Prime.Primes(max);
 
         public static bool isGoldbach(int n)
         {
