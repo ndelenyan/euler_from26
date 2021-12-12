@@ -21,7 +21,7 @@ namespace euler_from26
             foreach (var p in prime4())
                 primes4.Add(p);
             Console.WriteLine(primes4.Count);
-            // test
+            //
         }
     }
 }
