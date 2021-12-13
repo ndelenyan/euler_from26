@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 
 namespace euler_from26
 {
@@ -17,10 +18,10 @@ namespace euler_from26
 
         public static bool perm_4_primes(long n, long [] primes)
         {
-            List<long> res = new();
-            foreach (var p in Functions.Permute(Digits.digits_array(n), 0))
+            List<BigInteger> res = new();
+            foreach (var p in Functions.Permute(Digits.digitsAsArray(n), 0))
             {
-                long pp = Digits.int_from_digits(Functions.ToList(p));
+                var pp = Digits.int_from_digits(Functions.ToList(p));
                 if (pp == n)
                     continue;
                 if ((Digits.digit_len(pp) == 4) && (pp > n) && Array.IndexOf(primes, pp) >= 0)

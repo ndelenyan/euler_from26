@@ -8,7 +8,7 @@ namespace euler_from26
         public static void main()
         {
             for (long i = primes.Length - 1; i >= 1; i--)
-                if (Digits.isPandigital(Digits.digit_len(primes[i]), primes[i]))
+                if (Digits.isPandigital(Digits.digit_len(primes[i]), (int)primes[i]))
                 {
                     Console.WriteLine(primes[i]);
                     break;

@@ -1,19 +1,20 @@
 using System.IO;
 using System.Collections.Generic;
+using System.Numerics;
 
 namespace euler_from26
 {
     public static class Functions
     {
 
-        public static void swap(ref long a, ref long b)
+        public static void swap(ref int a, ref int b)
         {
-            long tmp = a;
+            int tmp = a;
             a = b;
             b = tmp;
         }
 
-        public static IEnumerable<long[]> Permute(long[] ints, long fix)
+        public static IEnumerable<int[]> Permute(int[] ints, long fix)
         {
             if (fix == ints.Length - 1)
                 yield return ints;
@@ -27,9 +28,9 @@ namespace euler_from26
                 }
         }
 
-        public static List<long> ToList(long[] array)
+        public static List<int> ToList(int[] array)
         {
-            List<long> lst = new();
+            List<int> lst = new();
             foreach(var l in array)
                 lst.Add(l);
             return lst;
@@ -63,5 +64,16 @@ namespace euler_from26
                 res *= i;
             return res;
         }
+
+        public static BigInteger Factorial(BigInteger n)
+        {
+            BigInteger res = 1;
+            if (n > 1)
+                for (BigInteger i = 2; i <= n; i++)
+                    res *= i;
+            return res;
+        }
+
+        public static BigInteger C(BigInteger n, BigInteger k) => Factorial(n) / (Factorial(k) * Factorial(n - k));
     }
 }

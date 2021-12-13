@@ -10,8 +10,8 @@ namespace euler_from26
             for(long numerator = 10; numerator < 99; numerator++)
                 for (long denominator = numerator + 1; denominator < 100; denominator++)
                 {
-                    var n_d = Digits.digits_list(numerator);
-                    var d_d = Digits.digits_list(denominator);
+                    var n_d = Digits.digitsAsList(numerator);
+                    var d_d = Digits.digitsAsList(denominator);
                     if (d_d[0] == 0 && n_d[0] == 0)
                         continue;
                     if (Digits.Reduce_Digits(n_d, d_d, 1))

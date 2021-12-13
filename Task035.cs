@@ -7,7 +7,7 @@ namespace euler_from26
     {
 
         public static long[] primes;
-        public static bool isCircular(List<long> digits)
+        public static bool isCircular(List<int> digits)
         {
             for (int i = 0; i < digits.Count - 1; i++)
             {
@@ -24,7 +24,7 @@ namespace euler_from26
             primes = Prime.Primes(1000000);
             foreach(var p in primes)
             {
-                var candidate = Digits.digits_list(p);
+                var candidate = Digits.digitsAsList(p);
                 if (isCircular(candidate))
                     count++;
             }

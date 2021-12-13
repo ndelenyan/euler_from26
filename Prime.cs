@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using System.Numerics;
 
 namespace euler_from26
 {
     public static class Prime
     {
 
-        public static bool isDivisible(long n, int by) => n % by == 0;
+        public static bool isDivisible(BigInteger n, BigInteger by) => n % by == 0;
         public static IEnumerable<long> Prime_to(long max)
         {
             long[] sieve = new long[max+1];

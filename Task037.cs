@@ -7,7 +7,7 @@ namespace euler_from26
     {
         public static long max = 1000000;
         public static long[] primes = Prime.Primes(max);
-        public static bool isTunc(long[] digits)
+        public static bool isTunc(int[] digits)
         {
             for (int i=1; i<digits.Length; i++)
             {
@@ -26,7 +26,7 @@ namespace euler_from26
             long sum = 0;
             long n = 0;
             for (int i = Array.IndexOf(primes, 11); i < primes.Length; i++)
-                if (isTunc(Digits.digits_array(primes[i])))
+                if (isTunc(Digits.digitsAsArray(primes[i])))
                 {
                     Console.WriteLine($"{++n}:\t{primes[i]}");
                     sum += primes[i];

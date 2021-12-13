@@ -1,20 +1,35 @@
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 
 namespace euler_from26
 {
     public static class Digits
     {
-        public static IEnumerable<long> digits (long n, long basis = 10)
+
+        public static IEnumerable<int> digits(BigInteger n, int basis = 10)
         {
-            while(n > 0)
-                {
-                    yield return n % basis;
-                    n /= basis;
-                }
+            while (n > 0)
+            {
+                yield return (int)(n % basis);
+                n /= basis;
+            }
         }
 
-        public static int digit_len(long n, int basis = 10)
+        public static List<int> digitsAsList(BigInteger n, int basis = 10)
+        {
+            List<int> res = new();
+            while (n > 0)
+            {
+                res.Add((int)(n % basis));
+                n /= basis;
+            }
+            return res;
+        }
+
+        public static int[] digitsAsArray(BigInteger n, int basis = 10) => digitsAsList(n, basis).ToArray();
+
+        public static int digit_len(BigInteger n, int basis = 10)
         {
             int l = 0;
             foreach (var d in digits(n, basis))
@@ -22,46 +37,25 @@ namespace euler_from26
             return l;
         }
 
-        public static List<long> digits_list(long n, long basis = 10)
+        public static BigInteger int_from_digits(IList<int> digits, bool reverse = false, int basis = 10)
         {
-            List<long> res = new();
-            foreach(var d in digits(n, basis))
-                res.Add(d);
+            BigInteger multiplier = 1;
+            BigInteger res = 0;
+            for (int i = 0; i < digits.Count; i++)
+            {
+                res += multiplier * (reverse ? digits[digits.Count - i - 1] : digits[i]);
+                multiplier *= basis;
+            }
             return res;
         }
-
-        public static void Rotate_Digits(List<long> p)
+        public static void Rotate_Digits(IList<int> p)
         {
-            long temp = p[0];
+            int temp = p[0];
             p.RemoveAt(0);
             p.Add(temp);
         }
 
-        public static long int_from_digits(List<long> p, long basis = 10)
-        {
-            long res = 0;
-            for ( int i = 0; i < p.Count; i++)
-                res += (int)Math.Pow(basis, i) * p[i];
-            return res;
-        }
-
-        public static long int_from_digits(int[] p, bool reverse = false, int basis = 10)
-        {
-            long res = 0;
-            if (! reverse)
-            {
-                for ( int i = 0; i < p.Length; i++)
-                    res += (long)Math.Pow(basis, i) * p[i];
-            }
-            else
-            {
-                for ( int i = 0; i < p.Length; i++)
-                    res += (long)Math.Pow(basis, i) * p[p.Length - i - 1];
-            }
-            return res;
-        }
-
-        public static bool Reduce_Digits(List<long> p1, List<long> p2, long max)
+        public static bool Reduce_Digits(List<int> p1, List<int> p2, long max)
         {
             int reduced = 0;
             int n1 = 0;
@@ -82,24 +76,18 @@ namespace euler_from26
             return false;
         }
 
-        public static long[] digits_array(long n, long basis = 10)
+        public static bool isPandigital(BigInteger n)
         {
-            List<long> res = new();
-            foreach(var d in digits(n, basis))
-                res.Add(d);
-            return res.ToArray();
-        }
-
-        public static bool isPandigital(long n)
-        {
-            long [] d = digits_array(n);
+            var d = digitsAsArray(n);
             for (int i = 1; i <= d.Length; i++)
                 if (Array.IndexOf(d, i) < 0)
                     return false;
             return true;
         }
 
-        public static bool isPalindrome(long[] digits)
+        public static bool isPalindrome(BigInteger n) => isPalindrome(digitsAsArray(n));
+
+        public static bool isPalindrome(int[] digits)
         {
             for (int i = 0; i < digits.Length ; i++)
                 if (digits[i] != digits[digits.Length - i - 1])
@@ -107,12 +95,12 @@ namespace euler_from26
             return true;
         }
 
-        public static bool isPandigital(long z, params long[] n)
+        public static bool isPandigital(BigInteger z, params int[] n)
         {
-            List<long>lst = new ();
+            List<int>lst = new ();
             foreach(int nn in n)
                 lst.AddRange(digits(nn));
-            long [] d = lst.ToArray();
+            int [] d = lst.ToArray();
             if (z != d.Length)
                 return false;
             for (int i = 1; i <= d.Length; i++)
