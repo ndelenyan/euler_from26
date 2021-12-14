@@ -75,5 +75,98 @@ namespace euler_from26
         }
 
         public static BigInteger C(BigInteger n, BigInteger k) => Factorial(n) / (Factorial(k) * Factorial(n - k));
+
+        public static BigInteger[,] fill__spiral_grid(int n, bool clockwise)
+        {
+            BigInteger[,] grid = new BigInteger[n, n];
+            int minX = n / 2;
+            int maxX = n / 2;
+            int minY = n / 2;
+            int maxY = n / 2;
+            long z = 1;
+            grid[minX, minY] = z;
+            if (clockwise)
+                // right - down - left - up
+                while (true)
+                {
+                    if (maxX < n - 1)
+                    {
+                        maxX++;
+                        for (int x = minX + 1; x <= maxX; x++)
+                            grid[minY, x] = ++z;
+                    }
+                    else
+                    {
+                        for (int x = minX + 1; x <= maxX; x++)
+                            grid[minY, x] = ++z;
+                        return grid;
+                    }
+                    if (maxY < n - 1)
+                    {
+                        maxY++;
+                        for (int y = minY + 1; y <= maxY; y++)
+                            grid[y, maxX] = ++z;
+                    }
+                    else
+                        return grid;
+                    if (minX > 0)
+                    {
+                        minX--;
+                        for (int x = maxX - 1; x >= minX; x--)
+                            grid[maxY, x] = ++z;
+                    }
+                    else
+                        return grid;
+                    if (minY > 0)
+                    {
+                        minY--;
+                        for (int y = maxY - 1; y >= minY; y--)
+                            grid[y, minX] = ++z;
+                    }
+                    else
+                        return grid;
+                }
+            else
+                // counter-clockwise
+                while (true)
+                {
+                    if (maxX < n - 1)
+                    {
+                        maxX++;
+                        for (int x = minX + 1; x <= maxX; x++)
+                            grid[maxY, x] = ++z;
+                    }
+                    else
+                    {
+                        for (int x = minX + 1; x <= maxX; x++)
+                            grid[maxY, x] = ++z;
+                        return grid;
+                    }
+                    if (minY > 0)
+                    {
+                        minY--;
+                        for (int y = maxY - 1; y >= minY; y--)
+                            grid[y, maxX] = ++z;
+                    }
+                    else
+                        return grid;
+                    if (minX > 0)
+                    {
+                        minX--;
+                        for (int x = maxX - 1; x >= minX; x--)
+                            grid[minY, x] = ++z;
+                    }
+                    else
+                        return grid;
+                    if (maxY < n - 1)
+                    {
+                        maxY++;
+                        for (int y = minY + 1; y <= maxY; y++)
+                            grid[y, minX] = ++z;
+                    }
+                    else
+                        return grid;
+                }
+        }
     }
 }
