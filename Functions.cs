@@ -1,11 +1,61 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Numerics;
+using System;
 
 namespace euler_from26
 {
     public static class Functions
     {
+
+        public static BigInteger[] Fibonacci(int count)
+        {
+            BigInteger[] res = new BigInteger[count];
+            res[0] = 0;
+            res[1] = 1;
+            for (int i = 2; i < count; i++)
+                res[i] = res[i - 1] + res[i - 2];
+            return res;
+        }
+        public static void PrintGrid(int[][]grid)
+        {
+            foreach (var line in grid)
+            {
+                foreach (var g in line)
+                    Console.Write($"{g} ");
+                Console.WriteLine();
+            }
+        }
+
+        public static int[] LoadNumbers(string filename)
+        {
+            List<string> lines = new();
+            StreamReader SR = new StreamReader(filename);
+            while (SR.Peek() >= 0)
+                lines.Add(SR.ReadLine());
+            SR.Close();
+            int[] grid = new int[lines.Count];
+            for (int i = 0; i < lines.Count; i++)
+                grid[i] = int.Parse(lines[i]);
+            return grid;
+        }
+        public static int[][] LoadGrid(string filename)
+        {
+            List<string> lines = new();
+            StreamReader SR = new StreamReader(filename);
+            while(SR.Peek() >= 0)
+                lines.Add(SR.ReadLine());
+            SR.Close();
+            int[][] grid = new int[lines.Count][];
+            for (int i = 0; i < lines.Count; i++)
+            {
+                var str_nums = lines[i].Split(" ");
+                grid[i] = new int[str_nums.Length];
+                for (int j = 0; j < str_nums.Length; j++)
+                    grid[i][j] = int.Parse(str_nums[j]);
+            }
+            return grid;
+        }
 
         public static void swap(ref int a, ref int b)
         {

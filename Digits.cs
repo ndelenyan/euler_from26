@@ -7,6 +7,14 @@ namespace euler_from26
     public static class Digits
     {
 
+        public static BigInteger digit_sum(BigInteger n)
+        {
+            BigInteger res = 0;
+            foreach(var p in digits(n))
+                res += p;
+            return res;
+        }
+
         public static IEnumerable<int> digits(BigInteger n, int basis = 10)
         {
             while (n > 0)
