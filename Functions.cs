@@ -78,6 +78,24 @@ namespace euler_from26
                 }
         }
 
+        public static IEnumerable<int[]> Combine(int[] ints, long fix)
+        {
+            if (fix == ints.Length - 1)
+                for (int i = 'A'; i <= 'Z'; i++)
+                {
+                    ints[fix] = i;
+                    yield return ints;
+                }
+            else
+                for (long f = fix; f < ints.Length; f++)
+                {
+                    foreach (var p in Combine(ints, fix + 1))
+                        yield return p;
+                }
+        }
+
+
+
         public static List<int> ToList(int[] array)
         {
             List<int> lst = new();
