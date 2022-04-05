@@ -24,18 +24,20 @@ namespace euler_from26
             }
         }
 
-        public static List<int> digitsAsList(BigInteger n, int basis = 10)
+        public static List<long> digitsAsList(BigInteger n, bool reverse = true, int basis = 10)
         {
-            List<int> res = new();
+            List<long> res = new();
             while (n > 0)
             {
                 res.Add((int)(n % basis));
                 n /= basis;
             }
+            if (reverse)
+                res.Reverse();
             return res;
         }
 
-        public static int[] digitsAsArray(BigInteger n, int basis = 10) => digitsAsList(n, basis).ToArray();
+        public static long[] digitsAsArray(BigInteger n, bool reverse = true, int basis = 10) => digitsAsList(n, reverse, basis).ToArray();
 
         public static int digit_len(BigInteger n, int basis = 10)
         {
@@ -45,7 +47,7 @@ namespace euler_from26
             return l;
         }
 
-        public static BigInteger int_from_digits(IList<int> digits, bool reverse = false, int basis = 10)
+        public static BigInteger int_from_digits(IList<long> digits, bool reverse = true, int basis = 10)
         {
             BigInteger multiplier = 1;
             BigInteger res = 0;
@@ -56,14 +58,14 @@ namespace euler_from26
             }
             return res;
         }
-        public static void Rotate_Digits(IList<int> p)
+        public static void Rotate_Digits(IList<long> p)
         {
-            int temp = p[0];
+            long temp = p[0];
             p.RemoveAt(0);
             p.Add(temp);
         }
 
-        public static bool Reduce_Digits(List<int> p1, List<int> p2, long max)
+        public static bool Reduce_Digits(List<long> p1, List<long> p2, long max)
         {
             int reduced = 0;
             int n1 = 0;
@@ -95,7 +97,7 @@ namespace euler_from26
 
         public static bool isPalindrome(BigInteger n) => isPalindrome(digitsAsArray(n));
 
-        public static bool isPalindrome(int[] digits)
+        public static bool isPalindrome(long[] digits)
         {
             for (int i = 0; i < digits.Length ; i++)
                 if (digits[i] != digits[digits.Length - i - 1])

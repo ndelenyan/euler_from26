@@ -7,11 +7,11 @@ namespace euler_from26
     {
         public static long max = 1000000;
         public static long[] primes = Prime.Primes(max);
-        public static bool isTunc(int[] digits)
+        public static bool isTunc(long[] digits)
         {
             for (int i=1; i<digits.Length; i++)
             {
-                int[] check = new int[i];
+                long[] check = new long[i];
                 Array.ConstrainedCopy(digits, 0, check, 0, i);
                 if (Array.IndexOf(primes, Digits.int_from_digits(check)) < 0)
                     return false;

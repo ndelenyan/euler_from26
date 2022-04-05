@@ -8,6 +8,44 @@ namespace euler_from26
     public static class Functions
     {
 
+        public static long[] AddArrays(long[] a1, long[] a2)
+        {
+            long[] res = new long[a1.Length + a2.Length];
+            Array.ConstrainedCopy(a1, 0, res, 0, a1.Length);
+            Array.ConstrainedCopy(a2, 0, res, a1.Length, a2.Length);
+            return res;
+        }
+
+        public static IEnumerable<long[]>Splitter(long[] digits)
+        {
+            if (digits.Length == 1)
+                yield return digits;
+            else
+            {
+                long start;
+                long[] startArray, rest, res;
+                for (int startLen = 1; startLen <= digits.Length; startLen++)
+                {
+                    int restLen = digits.Length - startLen;
+                    startArray = new long[startLen];
+                    rest = new long[restLen];
+                    Array.ConstrainedCopy(digits, 0, startArray, 0, startLen);
+                    start = (long)Digits.int_from_digits(startArray);
+                    if (restLen == 0)
+                        yield return new long[] { start };
+                    else
+                    {
+                        Array.ConstrainedCopy(digits, startLen, rest, 0, restLen);
+                        foreach (var s in Splitter(rest))
+                        {
+                            res = Functions.AddArrays(new long[] { start }, s);
+                            yield return res;
+                        }
+                    }
+                }
+            }
+        }
+
         public static BigInteger[] Fibonacci(int count)
         {
             BigInteger[] res = new BigInteger[count];
@@ -57,14 +95,14 @@ namespace euler_from26
             return grid;
         }
 
-        public static void swap(ref int a, ref int b)
+        public static void swap(ref long a, ref long b)
         {
-            int tmp = a;
+            long tmp = a;
             a = b;
             b = tmp;
         }
 
-        public static IEnumerable<int[]> Permute(int[] ints, long fix)
+        public static IEnumerable<long[]> Permute(long[] ints, long fix)
         {
             if (fix == ints.Length - 1)
                 yield return ints;
@@ -96,9 +134,9 @@ namespace euler_from26
 
 
 
-        public static List<int> ToList(int[] array)
+        public static List<long> ToList(long[] array)
         {
-            List<int> lst = new();
+            List<long> lst = new();
             foreach(var l in array)
                 lst.Add(l);
             return lst;

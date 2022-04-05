@@ -8,7 +8,7 @@ namespace euler_from26
 
         static void Main(string[] args)
         {
-            Task054.main();
+            Task719.main();
         }
     }
 }

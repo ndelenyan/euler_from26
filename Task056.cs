@@ -6,7 +6,7 @@ namespace euler_from26
     public static class Task056
     {
 
-        public static long sum(int[] d)
+        public static long sum(long[] d)
         {
             long r = 0;
             foreach(var dd in d)

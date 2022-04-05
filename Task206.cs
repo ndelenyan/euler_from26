@@ -10,7 +10,7 @@ namespace euler_from26
         {
             Console.WriteLine(Math.Sqrt(1929374254627488900));
 //            return;
-            int[] digits = { 0, 0, 9, 0, 8, 0, 7, 0, 6, 0, 5, 0, 4, 0, 3, 0, 2, 0, 1 };
+            long[] digits = { 0, 0, 9, 0, 8, 0, 7, 0, 6, 0, 5, 0, 4, 0, 3, 0, 2, 0, 1 };
             for (digits[3] = 0; digits[3] < 10; digits[3]++)
                 for (digits[5] = 0; digits[5] < 10; digits[5]++)
                 {

@@ -5,9 +5,9 @@ namespace euler_from26
     public static class Task38
     {
 
-        public static int[] concat_product(int n, int[] p)
+        public static long[] concat_product(long n, long[] p)
         {
-            int[]products = new int[p.Length];
+            long[]products = new long[p.Length];
             for (int i=0; i<p.Length; i++)
                 products[i] = n * p[i];
             return products;
@@ -18,11 +18,11 @@ namespace euler_from26
             for (int i=1; i<10000; i++)
                 for (int n = 2; n <= 9; n++)
                 {
-                    int[] nn = new int[n];
+                    long[] nn = new long[n];
                     for(int j=0; j<n; j++)
                         nn[j] = j+1;
                     var product = concat_product(i, nn);
-                    if (Digits.isPandigital((BigInteger)9, product))
+                    if (Digits.isPandigital((BigInteger)9/*, product*/))
                         Console.WriteLine(MyCollections.Print(product));
                 }
             Console.WriteLine();

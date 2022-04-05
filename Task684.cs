@@ -24,8 +24,8 @@ namespace euler_from26
                 return n;
             int nines = n / 9;
             int rest = n % 9;
-            int[] digits = new int[rest == 0 ? nines : nines + 1];
-            Array.Fill<int>(digits, 9);
+            long[] digits = new long[rest == 0 ? nines : nines + 1];
+            Array.Fill<long>(digits, 9);
             if (rest > 0)
                 digits[nines] = rest;
             return Digits.int_from_digits(digits);

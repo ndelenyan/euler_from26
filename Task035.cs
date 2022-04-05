@@ -7,7 +7,7 @@ namespace euler_from26
     {
 
         public static long[] primes;
-        public static bool isCircular(List<int> digits)
+        public static bool isCircular(List<long> digits)
         {
             for (int i = 0; i < digits.Count - 1; i++)
             {

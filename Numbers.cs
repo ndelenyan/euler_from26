@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace euler_from26
 {
@@ -38,6 +39,17 @@ namespace euler_from26
                 i++;
                 yield return H;
             } while (H <= max);
+        }
+
+        public static bool IsSNumber(long s)
+        {
+            long root = (long)Math.Sqrt(s);
+            if (root * root != s)
+                return false;
+            foreach(var split in Functions.Splitter(Digits.digitsAsArray(s)))
+                if (root == split.Sum())
+                    return true;
+            return false;
         }
     }
 }
