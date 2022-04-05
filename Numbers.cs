@@ -41,13 +41,13 @@ namespace euler_from26
             } while (H <= max);
         }
 
-        public static bool IsSNumber(long s)
+        public static bool IsSNumber(long root, long s)
         {
-            long root = (long)Math.Sqrt(s);
-            if (root * root != s)
-                return false;
-            foreach(var split in Functions.Splitter(Digits.digitsAsArray(s)))
-                if (root == split.Sum())
+//            long root = (long)Math.Sqrt(s);
+//            if (root * root != s)
+//                return false;
+            foreach(var spl in Functions.Splitter(Digits.digitsAsArray(s)))
+                if (root == Functions.sum(spl))
                     return true;
             return false;
         }

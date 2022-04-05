@@ -8,6 +8,14 @@ namespace euler_from26
     public static class Functions
     {
 
+        public static BigInteger sum(long[] a)
+        {
+            BigInteger S = 0;
+            foreach(var t in a)
+                S += t;
+            return S;
+        }
+
         public static long[] AddArrays(long[] a1, long[] a2)
         {
             long[] res = new long[a1.Length + a2.Length];
