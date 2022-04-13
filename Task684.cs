@@ -1,5 +1,6 @@
 using System;
 using System.Numerics;
+using System.Collections.Generic;
 
 namespace euler_from26
 {
@@ -20,31 +21,37 @@ namespace euler_from26
 
         public static BigInteger s_fast(int n)
         {
-            if (n < 10)
-                return n;
-            int nines = n / 9;
-            int rest = n % 9;
-            long[] digits = new long[rest == 0 ? nines : nines + 1];
-            Array.Fill<long>(digits, 9);
-            if (rest > 0)
-                digits[nines] = rest;
-            return Digits.int_from_digits(digits);
+                return (n % 9 + 1) * BigInteger.Pow(10, n / 9) - 1;
         }
 
-        public static BigInteger S(BigInteger k, BigInteger mod)
+        public static BigInteger S(long k, BigInteger mod)
         {
-            BigInteger sum = 0;
+            BigInteger sum = 5 * (BigInteger.Pow(10, k / 9) - 1);
             for (int n = 1; n <= k; n++)
                 sum += s_fast(n);
-            return sum;
+            return sum % mod;
+        }
+
+        public static long[] F(long count)
+        {
+            long[] res = new long[count];
+            res[0] = 0;
+            res[1] = 1;
+            for (int i = 2; i < count; i++)
+                res[i] = res[i - 2] + res[i - 1];
+            return res;
         }
 
         public static void main()
         {
             BigInteger mod = 1_000_000_007;
-            var F = Functions.Fibonacci(90);
+//            System.Console.WriteLine(S(20, mod));
+            var f = F(90);
+            // System.Console.WriteLine(MyCollections.Print(f));
             for (int i=2; i <= 90; i++)
-                Console.WriteLine($"{i}:\t{F[i]}:\t{S(F[i], mod)}");
+                Console.WriteLine($"{i}:\t{f[i]}:\t{S(f[i], mod)}");
+            // for (int i = 1; i < 20; i++)
+            //     System.Console.WriteLine($"{i}: {S(i, mod)}");
         }
     }
 }
