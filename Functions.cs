@@ -85,7 +85,7 @@ namespace euler_from26
                 grid[i] = int.Parse(lines[i]);
             return grid;
         }
-        public static int[][] LoadGrid(string filename)
+        public static int[][] LoadGrid(string filename, string delimeter = " ")
         {
             List<string> lines = new();
             StreamReader SR = new StreamReader(filename);
@@ -95,7 +95,7 @@ namespace euler_from26
             int[][] grid = new int[lines.Count][];
             for (int i = 0; i < lines.Count; i++)
             {
-                var str_nums = lines[i].Split(" ");
+                var str_nums = lines[i].Split(delimeter);
                 grid[i] = new int[str_nums.Length];
                 for (int j = 0; j < str_nums.Length; j++)
                     grid[i][j] = int.Parse(str_nums[j]);
