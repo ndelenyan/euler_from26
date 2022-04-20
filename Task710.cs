@@ -78,25 +78,25 @@ namespace euler_from26
                 arr[2] = 0;
             }
             arr[2] = 2;
-            addPair(arr, n - 4, 1);
-            if (n % 2 == 1)
+            for (long i = 0; i <= n - 4; i++)
             {
-                for (long i = 1; i <= n - 4; i += 2)
-                    if (n - 4 - i >= 0)
-                    {
-                        arr[i] = 1;
-                        addPair(arr, n - 4 - i, 1);
-                        arr[i] = 0;
-                    }
+                if (i==2)
+                    continue;
+                if ((n - 4 - i >= 0) && ((n - 4 - i) % 2 == 0))
+                {
+                    arr[i]++;
+                    addPair(arr, n - 4 - i, 1);
+                    arr[i]--;
+                }
             }
             arr[2] = 0;
         }
 
         public static long count2pals(long[] two)
         {
-            BigInteger top = 0;
-            BigInteger bottom = 1;
-            foreach(var t in two)
+            long top = 0;
+            long bottom = 1;
+            foreach(long t in two)
                 if (t == 0)
                     continue;
                 else if (t % 2 == 0)
@@ -109,7 +109,7 @@ namespace euler_from26
                     top += (t - 1 ) / 2;
                     bottom *= Functions.Factorial((t - 1) / 2);
                 }
-            return (long)(Functions.Factorial(top) / bottom);
+            return Functions.Factorial(top) / bottom;
         }
 
         public static long countTwoPals(long n)
@@ -119,22 +119,37 @@ namespace euler_from26
             init(n);
             foreach (var t in twopals)
             {
-                var c = count2pals(t);
-                System.Console.WriteLine($"{MyCollections.Print(t)} {c}");
+                long c = count2pals(t);
+//                System.Console.WriteLine($"{MyCollections.Print(t)} {c}");
                 sum += c;
             }
             return sum;
         }
 
+        public static Dictionary<long, long> T = new();
+        public static long mod = 1_000_000;
+
         public static void main()
         {
-            System.Console.WriteLine(countTwoPals(10));
-            // 1 1 2 2
-            // 1 2 1 2
-            // 1 2 2 1
-            // 2 1 1 2
-            // 2 1 2 1
-            // 2 2 1 1
+            int n = 6;
+            long c = 0;
+            do
+            {
+                if (n > 9)
+                {
+                    if ((n % 2 == 1))
+                        c = T[n - 2] + T[n - 3];
+                    else
+                        c = T[n - 2] + T[n - 3] + (long)BigInteger.ModPow(2, n / 2 - 2, mod);
+                }
+                else
+                    c = countTwoPals(n);
+                c %= mod;
+                T.Add(n, c);
+                System.Console.WriteLine($"{n}\t{c}\t");
+//                System.Console.WriteLine((n % 2 == 0) && (n >= 9) ? c - T[n-2] - T[n-3] : "");
+                n++;
+            } while (c % 1_000_000 != 0);
         }
     }
 }
