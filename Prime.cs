@@ -33,14 +33,29 @@ namespace euler_from26
             return primes.ToArray();
         }
 
-        public static IEnumerable<int> Divisors(int N)
+        public static IEnumerable<long> Divisors(long N)
         {
-            for (int candidate = 1; candidate <= N / 2; candidate++)
+            for (long candidate = 1; candidate <= N / 2; candidate++)
                 if (N % candidate == 0)
                     yield return candidate;
+            yield return N;
         }
 
-        public static List<long>Prime_Divisors(long n, long[] primes)
+
+        public static IEnumerable<long>Prime_Divisors(long n, long[] primes)
+        {
+            int index = 0;
+            while (n > 1)
+                if (n % primes[index] == 0)
+                {
+                    n /= primes[index];
+                    yield return primes[index];
+                }
+                else
+                    index++;
+        }
+
+        public static List<long>Prime_Divisors_List(long n, long[] primes)
         {
             List<long> divisors = new ();
             int index = 0;
@@ -55,7 +70,7 @@ namespace euler_from26
             return divisors;
         }
 
-        public static long[] Prime_Divisors_array(long n, long[] primes) => Prime_Divisors(n, primes).ToArray();
+        //public static long[] Prime_Divisors_array(long n, long[] primes) => Prime_Divisors(n, primes).ToArray();
 
         public static HashSet<long> Prime_Unique_Divisors(long n, long[] primes) => new HashSet<long>(Prime_Divisors(n, primes));
 
