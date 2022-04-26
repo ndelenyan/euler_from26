@@ -189,6 +189,7 @@ namespace euler_from26
         }
 
         public static BigInteger C(BigInteger n, BigInteger k) => Factorial(n) / (Factorial(k) * Factorial(n - k));
+        public static BigInteger A(BigInteger n, BigInteger k) => Factorial(n) / Factorial(k);
 
         public static BigInteger[,] fill__spiral_grid(int n, bool clockwise)
         {
