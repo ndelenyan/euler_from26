@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 
@@ -12,6 +13,7 @@ namespace euler_from26
             long[] sieve = new long[max+1];
             // 0 means can be prime
             // 1 means compound
+            yield return 1;
             for (long candidate = 2; candidate <= max; candidate++)
                 if (sieve[candidate] == 0)
                 {
@@ -39,6 +41,41 @@ namespace euler_from26
                 if (N % candidate == 0)
                     yield return candidate;
             yield return N;
+        }
+
+        public static IEnumerable<long[]>combos(long[] nums)
+        {
+            if (nums.Length == 1)
+                yield return new long[] { nums[0] };
+            else
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    yield return new long[] { nums[i] };
+                    int restLen = nums.Length - 1;
+                    long[] restNums = new long[restLen];
+                    Array.ConstrainedCopy(nums, 0, restNums, 0, i);
+                    Array.ConstrainedCopy(nums, i + 1, restNums, i, nums.Length - i - 1);
+                    foreach(var r in combos(restNums))
+                    {
+                        var res = MyCollections.AddArray(nums[i], r);
+                        yield return res;
+                    }
+                }
+        }
+
+        public static IEnumerable<long> Prime_Divisors_All(long n, long[] primes)
+        {
+            yield return 1;
+            int index = 1;
+            while (n > 1)
+            {
+                while (n % primes[index] == 0)
+                {
+                    n /= primes[index];
+                    yield return primes[index];
+                }
+                index++;
+            }
         }
 
 

@@ -16,13 +16,32 @@ namespace euler_from26
             return S;
         }
 
-        public static long[] AddArrays(long[] a1, long[] a2)
+        public static BigInteger product(long[] a)
         {
-            long[] res = new long[a1.Length + a2.Length];
-            Array.ConstrainedCopy(a1, 0, res, 0, a1.Length);
-            Array.ConstrainedCopy(a2, 0, res, a1.Length, a2.Length);
-            return res;
+            BigInteger S = 1;
+            foreach (var t in a)
+                S *= t;
+            return S;
         }
+
+        // public static long[] AddArrays(long[] a1, long[] a2)
+        // {
+        //     long[] res = new long[a1.Length + a2.Length];
+        //     Array.ConstrainedCopy(a1, 0, res, 0, a1.Length);
+        //     Array.ConstrainedCopy(a2, 0, res, a1.Length, a2.Length);
+        //     return res;
+        // }
+
+
+        public static long[] rest(long[] a, int ex)
+        {
+            long[] r = new long[a.Length - 1];
+            Array.ConstrainedCopy(a, 0, r, 0, ex);
+            Array.ConstrainedCopy(a, ex + 1, r, ex, a.Length - ex - 1);
+            return r;
+        }
+
+
 
         public static IEnumerable<long[]>Splitter(long[] digits)
         {
@@ -46,7 +65,7 @@ namespace euler_from26
                         Array.ConstrainedCopy(digits, startLen, rest, 0, restLen);
                         foreach (var s in Splitter(rest))
                         {
-                            res = Functions.AddArrays(new long[] { start }, s);
+                            res = MyCollections.AddArrays(new long[] { start }, s);
                             yield return res;
                         }
                     }
