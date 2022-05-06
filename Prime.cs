@@ -10,7 +10,7 @@ namespace euler_from26
         public static bool isDivisible(BigInteger n, BigInteger by) => n % by == 0;
         public static IEnumerable<long> Prime_to(long max)
         {
-            long[] sieve = new long[max+1];
+            long[] sieve = new long[max + 1];
             // 0 means can be prime
             // 1 means compound
             yield return 1;
@@ -29,8 +29,8 @@ namespace euler_from26
 
         public static long[] Primes(long max)
         {
-            List<long>primes = new();
-            foreach(long p in Prime_to(max))
+            List<long> primes = new();
+            foreach (long p in Prime_to(max))
                 primes.Add(p);
             return primes.ToArray();
         }
@@ -43,25 +43,14 @@ namespace euler_from26
             yield return N;
         }
 
-        public static IEnumerable<long[]>combos(long[] nums)
+        public static IEnumerable<long> Divisors_2toSqrt(long N)
         {
-            if (nums.Length == 1)
-                yield return new long[] { nums[0] };
-            else
-                for (int i = 0; i < nums.Length; i++)
-                {
-                    yield return new long[] { nums[i] };
-                    int restLen = nums.Length - 1;
-                    long[] restNums = new long[restLen];
-                    Array.ConstrainedCopy(nums, 0, restNums, 0, i);
-                    Array.ConstrainedCopy(nums, i + 1, restNums, i, nums.Length - i - 1);
-                    foreach(var r in combos(restNums))
-                    {
-                        var res = MyCollections.AddArray(nums[i], r);
-                        yield return res;
-                    }
-                }
+            for (long candidate = 2; candidate <= (long)Math.Sqrt(N); candidate++)
+                if (N % candidate == 0)
+                    yield return candidate;
+            //            yield return N;
         }
+
 
         public static IEnumerable<long> Prime_Divisors_All(long n, long[] primes)
         {
@@ -79,7 +68,7 @@ namespace euler_from26
         }
 
 
-        public static IEnumerable<long>Prime_Divisors(long n, long[] primes)
+        public static IEnumerable<long> Prime_Divisors(long n, long[] primes)
         {
             int index = 0;
             while (n > 1)
@@ -92,11 +81,11 @@ namespace euler_from26
                     index++;
         }
 
-        public static List<long>Prime_Divisors_List(long n, long[] primes)
+        public static List<long> Prime_Divisors_List(long n, long[] primes)
         {
-            List<long> divisors = new ();
+            List<long> divisors = new();
             int index = 0;
-            while(n>1)
+            while (n > 1)
                 if (n % primes[index] == 0)
                 {
                     divisors.Add(primes[index]);
