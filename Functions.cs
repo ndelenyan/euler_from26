@@ -73,9 +73,9 @@ namespace euler_from26
             }
         }
 
-        public static BigInteger[] Fibonacci(int count)
+        public static long[] Fibonacci(int count)
         {
-            BigInteger[] res = new BigInteger[count];
+            long[] res = new long[count];
             res[0] = 0;
             res[1] = 1;
             for (int i = 2; i < count; i++)
