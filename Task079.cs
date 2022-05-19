@@ -25,8 +25,8 @@ namespace euler_from26
         public static void main()
         {
             int[] passes = Functions.LoadNumbers("p079_keylog.txt");
-            HashSet<int> pass = new();
-            HashSet<int> digits = new();
+            HashSet<long> pass = new();
+            HashSet<long> digits = new();
             foreach (var p in passes)
             {
                 pass.Add(p);

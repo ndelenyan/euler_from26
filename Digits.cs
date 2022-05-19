@@ -15,7 +15,7 @@ namespace euler_from26
             return res;
         }
 
-        public static IEnumerable<int> digits(BigInteger n, int basis = 10)
+        public static IEnumerable<long> digits(BigInteger n, int basis = 10)
         {
             while (n > 0)
             {
@@ -105,12 +105,12 @@ namespace euler_from26
             return true;
         }
 
-        public static bool isPandigital(BigInteger z, params int[] n)
+        public static bool isPandigital(BigInteger z, params long[] n)
         {
-            List<int>lst = new ();
+            List<long>lst = new ();
             foreach(int nn in n)
                 lst.AddRange(digits(nn));
-            int [] d = lst.ToArray();
+            long [] d = lst.ToArray();
             if (z != d.Length)
                 return false;
             for (int i = 1; i <= d.Length; i++)

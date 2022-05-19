@@ -14,7 +14,7 @@ namespace euler_from26
             return k;
         }
 
-        public static long[] countDigits(IEnumerable<int> digits)
+        public static long[] countDigits(IEnumerable<long> digits)
         {
             long[] res = new long[10];
             foreach(var d in digits)

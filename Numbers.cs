@@ -51,5 +51,24 @@ namespace euler_from26
                     return true;
             return false;
         }
+
+        public static long[] count_digits(IEnumerable<long>digits)
+        {
+            long[] res = new long[10];
+            foreach (var d in digits)
+                res[d]++;
+            return res;
+        }
+        public static bool IsDominating(long n)
+        {
+            var digits = Digits.digitsAsArray(n);
+            var counts = count_digits(digits);
+            long len = digits.Length / 2;
+            foreach(var c in counts)
+                if (c > len)
+                    return true;
+            return false;
+        }
+
     }
 }
