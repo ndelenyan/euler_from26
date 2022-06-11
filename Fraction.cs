@@ -28,5 +28,15 @@ namespace euler_from26
         public Fraction inverse() => new Fraction(this.denominator, this.nominator);
 
         public override string ToString() => nominator.ToString() + "/" + denominator.ToString();
+
+        public override bool Equals(object obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
