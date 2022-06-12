@@ -18,6 +18,6 @@
 	"Euler Task":
 	{
 		"prefix": "Task",
-		"body": "using System;\r\nnamespace euler_from26\r\n{\r\n\tpublic static class $TM_FILENAME_BASE\r\n\t{\r\n\t\tpublic static void main ()\r\n\t\t{\r\n\t\t\tConsole.WriteLine(\"$TM_FILENAME_BASE\");\r\n\t\t}\r\n\t}\r\n}\r\n",
+		"body": "using System;\r\n\r\nnamespace euler_from26\r\n{\r\n\tpublic static class $TM_FILENAME_BASE\r\n\t{\r\n\t\tpublic static void main ()\r\n\t\t{\r\n\t\t\tConsole.WriteLine(\"$TM_FILENAME_BASE\");\r\n\t\t}\r\n\t}\r\n}\r\n",
 	}
 }
