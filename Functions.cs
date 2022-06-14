@@ -129,7 +129,7 @@ namespace euler_from26
             b = tmp;
         }
 
-        public static IEnumerable<long[]> Permute(long[] ints, long fix)
+        public static IEnumerable<long[]> Permute(long[] ints, long fix = 0)
         {
             if (fix == ints.Length - 1)
                 yield return ints;

@@ -5,73 +5,94 @@ namespace euler_from26
 {
     public static class Task061
     {
-
-        public static long P(long i, long n)
+        public static long p(long i, long n)
         {
             switch(i)
             {
-                case 3: return n * (n + 1) / 2;
-                case 4: return n * n;
-                case 5: return n * (3 * n - 1) / 2;
-                case 6: return n * (2 * n - 1);
-                case 7: return n * (5 * n - 3) / 2;
-                case 8: return n * (3 * n - 2);
-                default: return 0;
+                case 0: return n * (n + 1) / 2;
+                case 1: return n * n;
+                case 2: return n * (3 * n - 1) / 2;
+                case 3: return n * (2 * n - 1);
+                case 4: return n * (5 * n - 3) / 2;
+                case 5: return n * (3 * n - 2);
+                default: return -1;
             }
-
         }
 
-        public static long[][]p = new long[9][];
+        public static long[][] P = new long[6][];
 
-        public static IEnumerable<long[]>addCycle(long n) // n [3..8]
+        public static void fill_4_digits()
         {
-            if (n == 8)
-                foreach(var x in p[n])
-                    yield return new long[] {x};
+            for(long i = 0; i < 6; i++)
+            {
+                // Console.WriteLine(i);
+                long n = 1;
+                long len = 0;
+                List<long> l = new();
+                while(len <= 4)
+                {
+                    long c = p(i, n);
+                    len = Digits.digit_len(c);
+                    if (len == 4)
+                        l.Add(c);
+                    n++;
+                }
+                P[i] = l.ToArray();
+            }
+        }
+
+        public static bool check_last_first(long a, long b)
+        {
+            var digits_a = Digits.digitsAsArray(a);
+            var digits_b = Digits.digitsAsArray(b);
+            var last_a = Digits.int_from_digits(new long[]{digits_a[2], digits_a[3]});
+            var first_b = Digits.int_from_digits(new long[]{digits_b[0], digits_b[1]});
+            return last_a == first_b;
+        }
+
+        public static List<long[]> chains(List<long[]>start, long i)
+        {
+            List<long[]>res = new();
+            if (i==0)
+            {
+                foreach(var c in P[i])
+                    res.Add(new long[]{c});
+            }
             else
-                foreach(var x in p[n])
-                    foreach(var y in addCycle(n + 1))
+            {
+                // Console.WriteLine(MyCollections.Print(P[i]));
+                foreach(var link in start)
+                {
+                    foreach(var c in P[i])
                     {
-                        var x_digits = Digits.digitsAsArray(x);
-                        var y_digits = Digits.digitsAsArray(y[0]);
-                        var x_last = Digits.int_from_digits(new long[]{x_digits[2], x_digits[3]});
-                        var y_first = Digits.int_from_digits(new long[]{y_digits[0], x_digits[1]});
-                        if (x_last == y_first)
-                            if (n != 3)
-                                yield return MyCollections.AddArray(x, y);
-                            else
-                            {
-                                var last_digits = Digits.digitsAsArray(y[4]);
-                                var x_first = Digits.int_from_digits(new long[]{x_digits[0], x_digits[1]});
-                                var last_last = Digits.int_from_digits(new long[]{last_digits[2], last_digits[3]});
-                                if (x_first == last_last)
-                                    yield return MyCollections.AddArray(x, y);
-                            }
+                        if (check_last_first(link[link.Length-1], c))
+                            res.Add(MyCollections.AddArrays(link, new long[]{c}));
                     }
+                }
+            }
+            return res;
         }
 
         public static void main ()
         {
             Console.WriteLine("Task061");
-            long min = 1_000;
-            long max = 9_999;
-            for(long i = 3; i <= 8; i++)
+            fill_4_digits();
+            foreach(var c in P)
+                Console.WriteLine(c.Length);
+
+            foreach(var p in Functions.Permute(new long[]{0, 1, 2, 3, 4, 5}))
             {
-                List<long> d = new ();
-                long n = 1;
-                long z = P(i, n);
-                do
+                List<long[]> chain = new();
+                for(long i = 0; i < 6; i++)
                 {
-                    n++;
-                    if (min <= z && z <= max)
-                        d.Add(z);
-                    z = P(i, n);
-                } while (z <= max);
-                Console.WriteLine($"{i}:\t{d.Count}");
-                p[i] = d.ToArray();
+                    // Console.WriteLine(i);
+                    var c = chains(chain, p[i]);
+                    chain = c;
+                }
+                foreach(var c in chain)
+                    if (check_last_first(c[5], c[0])) 
+                            Console.WriteLine(Functions.sum(c));
             }
-            foreach(var d in addCycle(7))
-                Console.WriteLine(MyCollections.Print(d));
         }
     }
 }
