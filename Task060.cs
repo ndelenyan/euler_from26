@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace euler_from26
 {
@@ -39,26 +40,38 @@ namespace euler_from26
         {
             long c = 0;
             long start = 0;
-            Console.WriteLine(max);
+            // Console.WriteLine(max);
             // max = 10_000;
-            long[] chain = new long[0];
-            while(start < max)
-            {
-                c = start;
-                chain = new long[0];
-                while(c < max && chain.Length < 5)
-                {
-                    if (check_pairs(chain, primes[c]))
-                        chain = add(chain, primes[c]);
-                    c++;
-                }
-                if (chain.Length == 5)
-                {
-                    Console.WriteLine($"{MyCollections.Print(chain)} {Functions.sum(chain)}");
-                    return;
-                }
-                start++;
-            }
+            // long[] chain = new long[0];
+            // while(start < max)
+            // {
+            //     Console.WriteLine(start);
+            //     c = start;
+            //     chain = new long[0];
+            //     while(c < max && chain.Length < 5)
+            //     {
+            //         if (check_pairs(chain, primes[c]))
+            //             chain = add(chain, primes[c]);
+            //         c++;
+            //     }
+            //     if (chain.Length == 5)
+            //     {
+            //         Console.WriteLine($"{MyCollections.Print(chain)} {Functions.sum(chain)}");
+            //         return;
+            //     }
+            //     start++;
+            // }
+            List<(long, long)> q = new();
+            long count = 0;
+            for (long c1 = 1; c1 <= max; c1++)
+                for (long c2 = c1 + 1; c2 <= max; c2++)
+                    if (check_pair(primes[c1], primes[c2]) && primes[c1] + primes[c2] < primes[max])
+                    {
+                        q.Add((primes[c1], primes[c2]));
+                        // Console.Write(pr);
+                        count++;
+                    }
+            Console.WriteLine(count);
         }
     }
 }
