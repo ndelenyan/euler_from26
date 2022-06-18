@@ -38,8 +38,8 @@ namespace euler_from26
 
         public static void main ()
         {
-            long c = 0;
-            long start = 0;
+            // long c = 0;
+            // long start = 0;
             // Console.WriteLine(max);
             // max = 10_000;
             // long[] chain = new long[0];
@@ -61,17 +61,24 @@ namespace euler_from26
             //     }
             //     start++;
             // }
-            List<(long, long)> q = new();
-            long count = 0;
+            // for(int i = 0; i <10;i++)
+            //     Console.WriteLine(primes[i]);
+            // List<long[]> q = new();
+            // long count = 0;
             for (long c1 = 1; c1 <= max; c1++)
+            {
+                Console.WriteLine($"{c1}\t{max}");
                 for (long c2 = c1 + 1; c2 <= max; c2++)
-                    if (check_pair(primes[c1], primes[c2]) && primes[c1] + primes[c2] < primes[max])
-                    {
-                        q.Add((primes[c1], primes[c2]));
-                        // Console.Write(pr);
-                        count++;
-                    }
-            Console.WriteLine(count);
+                    if (check_pair(primes[c1], primes[c2]))
+                        for (long c3 = c2 + 1; c3 <= max; c3++)
+                           if (check_pair(primes[c3], primes[c1]) && check_pair(primes[c3], primes[c2]) )
+                              for (long c4 = c3 + 1; c4 <= max; c4++)
+                                   if (check_pair(primes[c4], primes[c1]) && check_pair(primes[c4], primes[c2]) && check_pair(primes[c4], primes[c3]) )
+                                        for (long c5 = c4 + 1; c5 <= max; c5++)
+                                            if (check_pair(primes[c5], primes[c1]) && check_pair(primes[c5], primes[c2]) && check_pair(primes[c5], primes[c3])  && check_pair(primes[c5], primes[c4]))
+                                                Console.WriteLine($"{primes[c1] + primes[c2] + primes[c3] + primes[c4] + primes[c5]}");
+            }
+            // Console.WriteLine(count);
         }
     }
 }
