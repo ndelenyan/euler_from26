@@ -66,7 +66,7 @@ namespace euler_from26
                     index++;
         }
 
-        public static List<long> Prime_Divisors_List(long n, long[] primes, bool one)
+        public static List<long> Prime_Divisors_List(long n, long[] primes, bool one = true)
         {
             List<long> divisors = new();
             foreach (var d in Prime_Divisors(n, primes, one))
@@ -74,7 +74,7 @@ namespace euler_from26
             return divisors;
         }
 
-        public static HashSet<long> Prime_Unique_Divisors(long n, long[] primes) => new HashSet<long>(Prime_Divisors(n, primes));
+        public static HashSet<long> Prime_Unique_Divisors(long n, long[] primes, bool one = true) => new HashSet<long>(Prime_Divisors(n, primes, one));
 
         public static void Reduce_Divisors(List<int> p1, List<int> p2)
         {

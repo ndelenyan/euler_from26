@@ -31,18 +31,21 @@ namespace euler_from26
             }
         }
 
-        public static void main ()
+        public static long count_between(Fraction from, Fraction to)
         {
-            List<Fraction> fracs = new();
+                    List<Fraction> fracs = new();
             foreach(var f in fractions(max))
                 fracs.Add(f);
             long count = 0;
-            Fraction third = new Fraction(1, 3);
-            Fraction half = new Fraction(1, 2);
             foreach(Fraction f in fracs)
-                if (f > third && f < half)
+                if (f > from && f < to)
                     count++;
-            Console.WriteLine(count);
+            return count;
+        }
+
+        public static void main ()
+        {
+            Console.WriteLine(count_between(new Fraction(1, 3), new Fraction(1, 2)));
         }
     }
 }
