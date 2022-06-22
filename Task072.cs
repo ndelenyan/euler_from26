@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace euler_from26
 {
@@ -26,7 +27,7 @@ namespace euler_from26
             // for (int i = 1; i <= 10; i++)
             //     Console.WriteLine(MyCollections.Print(divisors[i]));
             long count = 0;
-            for (long i = 1; i <= max; i++)
+            Parallel.For(1, max + 1, i =>
             {
                 if (i % 10_000 == 0)
                     Console.WriteLine($"{i} / {max}");
@@ -42,7 +43,7 @@ namespace euler_from26
                     if (! are_reducible)
                         count++;                    
                 }
-            }
+            });
             Console.WriteLine(count);
         }
     }
