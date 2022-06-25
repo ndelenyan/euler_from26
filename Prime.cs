@@ -96,5 +96,26 @@ namespace euler_from26
                 p2.Add(1);
         }
 
+        public static long totient(long n, long[] primes)
+        {
+            // for prime numbers phi(n) = n-1
+            if (n==1)
+                return 1;
+            else if (Array.BinarySearch(primes, n) >= 0)
+                return n - 1;
+            else
+            {
+                var p = Prime_Unique_Divisors(n, primes, false);
+                long no = 1;
+                long de = 1;
+                foreach(var pp in p)
+                {
+                    no *= pp - 1;
+                    de *= pp;
+                }
+                return n * no / de;
+            }
+        }
+
     }
 }
