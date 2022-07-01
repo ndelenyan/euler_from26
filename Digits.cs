@@ -37,6 +37,24 @@ namespace euler_from26
             return res;
         }
 
+        public static bool are_permutation(long n1, long n2)
+        {
+            var d1 = countDigits(n1);
+            var d2 = countDigits(n2);
+            for (int i = 0; i < d1.Length; i++)
+                if (d1[i] != d2[i])
+                    return false;
+            return true;
+        }
+
+        public static long[] countDigits(BigInteger n) 
+        {
+            long[] counts = new long[10];
+            foreach(var d in digitsAsArray(n))
+                counts[d]++;
+            return counts;
+        }
+
         public static long[] digitsAsArray(BigInteger n, bool reverse = true, int basis = 10) => digitsAsList(n, reverse, basis).ToArray();
 
         public static int digit_len(BigInteger n, int basis = 10)
